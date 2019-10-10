@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: SVG bar chart with value labels (centered)</title>
+		<script type="text/javascript" src="../d3.js"></script>
+		<style type="text/css">
+			/* No style rules here yet */	
+			#svg {
+				background: #f00;;
+                        }
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+			//Width and height
+			var w = 500;
+			var h = 100;
+			var barPadding = 5;
+			
+                        //versie 1: we gebruiken geen .csv maar laden de data standaard
+                        dataset = [25, 20, 18, 14, 13, 12, 12, 12, 9, 8, 5, 2];
+
+                        //Add an SVG element to the body
+                        //Set width and height
+                        var svg = d3.select("body")
+
+                        //Add a "rect"-element for every datapoint in dataset
+                        //Tip: https://www.d3indepth.com/enterexit/
+                        //Make them the right size
+                        //Position them
+                        svg.selectAll("rect")
+
+                        //Add every value as text
+                        //Position the text
+                        //Style the text by adding a class and using css
+
+			
+		</script>
+	</body>
+</html>

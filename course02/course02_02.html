@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: SVG bar chart with value labels (centered)</title>
+		<script type="text/javascript" src="../d3.js"></script>
+		<style type="text/css">
+			/* No style rules here yet */	
+			#svg {
+				background: #f00;;
+			}	
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+            //Versie 2
+            //Laad de data uit een CSV, je hebt nu geen eenvoudige array met ints
+            //Maar wel een array bestaande uit objecten
+            
+			//Width and height
+			var w = 500;
+			var h = 100;
+			var barPadding = 1;
+			
+            var dataset = null;
+
+			d3.csv('./federaal.csv', function(data) {
+                dataset = data;
+                init();
+            });
+			
+            function init() {
+
+            }
+			
+		</script>
+	</body>
+</html>
