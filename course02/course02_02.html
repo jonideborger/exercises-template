@@ -3,12 +3,68 @@
 	<head>
 		<meta charset="utf-8">
 		<title>D3: SVG bar chart with value labels (centered)</title>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap" rel="stylesheet">
 		<script type="text/javascript" src="../d3.js"></script>
 		<style type="text/css">
 			/* No style rules here yet */	
+			body, html {
+				background: #AAA;
+			}
 			#svg {
-				background: #f00;;
 			}	
+
+			.text {
+				font-family: 'Roboto', sans-serif;
+				fill: #fff;
+				font-size: 1em;
+				text-anchor: middle;
+			}
+
+			.zetels {
+				font-weight: 900;
+			}
+
+			.partij {
+				text-transform: uppercase;
+				font-weight: 300;
+			}
+			
+			.NV-A {
+				fill: rgb(250, 221, 0);
+			}
+
+			.PS,
+			.sp-a {
+
+				fill: rgb(255, 0, 20);
+			}
+
+			.VlaamsBelang {
+				fill: rgb(225, 174, 31);
+			}
+
+			.CDV,
+			.CDH {
+				fill: rgb(255, 128, 0);
+			}
+
+			.MR,
+			.Open-VLD {
+				fill: rgb(29, 78, 182);
+			}
+
+			.Ecolo,
+			.groen {
+				fill: rgb(0, 163, 160)
+			}
+
+			.PTB-PVDA {
+				fill: rgb(204, 0, 68)
+			}
+
+			.DeFi {
+				fill: rgb(203, 0, 173);
+			};
 		</style>
 	</head>
 	<body>
@@ -16,21 +72,94 @@
             //Versie 2
             //Laad de data uit een CSV, je hebt nu geen eenvoudige array met ints
             //Maar wel een array bestaande uit objecten
-            
 			//Width and height
-			var w = 500;
-			var h = 100;
-			var barPadding = 1;
+			var w = 1200;
+			var h = 400;
+
+			var barPadding = 5;
+			var textOffset = -20;
+			var yScalar = 10;
+			var yOffset = 50;
 			
             var dataset = null;
 
-			d3.csv('./federaal.csv', function(data) {
-                dataset = data;
+			function dataConvertor(d) {
+				return {
+					Partij: d.Partij,
+					Zetels: parseInt(d.Zetels)
+				}
+			}
+
+			d3.csv('./federaal.csv', dataConvertor, function(data) {
+				dataset = data;
+				console.log('data', data);
                 init();
             });
 			
             function init() {
+				var svg = d3.select("body")
+					.append("svg")
+					.attr("id", "svg")
+					.attr("width", w)
+					.attr("height", h);
 
+				//Creating rects
+				svg.selectAll("rect")
+					.data(dataset)
+					.enter()
+					.append("rect")
+					.attr("x", function(d, i) {
+							return i * (w / dataset.length);
+					})
+					.attr("y", function(d) {
+							return h - (d.Zetels * yScalar) - yOffset;
+					})
+					.attr("rx", "5px")
+					.attr("ry", "5px")
+					.attr("width", w / dataset.length - barPadding)
+					.attr("height", function(d) {
+							return d.Zetels * yScalar;
+					})
+					.attr("class", function (d) {
+						var partij = d.Partij.replace(/\s/g, '');
+						return 'bar ' + partij
+					});
+					/* .attr("fill", function(d) {
+							return "rgb(0, 0, " + Math.round(d * yScalar) + ")";
+					}); */
+
+				svg.selectAll(".zetels")
+					.data(dataset)
+					.enter()
+					.append("text")
+					.text(function(d) {
+						return d.Zetels
+					})
+					.attr("x", function (d, i) {
+						var halfBar = (w / dataset.length) / 2;
+						return i * (w / dataset.length) + halfBar
+					})
+					.attr("y", function (d, i) {
+						return h - ( d.Zetels * 10) + textOffset - yOffset
+					})
+					.attr("class", "text zetels");
+
+				svg.selectAll(".partij")
+					.data(dataset)
+					.enter()
+					.append("text")
+					.text(function (d) {
+						return d.Partij
+					})
+					.attr("x", function(d, i) {
+						var halfBar = (w / dataset.length) / 2;
+						return i * (w / dataset.length) + halfBar
+					})
+					.attr("y", function() {
+						return h - yOffset/2
+					})
+					.attr("class", "text partij")
+				
             }
 			
 		</script>
