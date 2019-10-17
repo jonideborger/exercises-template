@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Treemap chart with value labels (centered)</title>
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<style type="text/css">
+			/* No style rules here yet */	
+			#svg {
+				background: #f00;;
+			}	
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//Treemap chart
+
+			//Settings
+			var w = 600
+			var h = 300
+
+
+			//Data
+			d3.csv('./federaal.csv', function(data) {
+                dataset = data;
+                init();
+            });
+			
+            function init() {
+
+            }
+			
+		</script>
+	</body>
+</html>

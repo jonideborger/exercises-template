@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: SVG pie chart </title>
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<style type="text/css">
+			/* No style rules here yet */	
+			#svg {
+				background: #f00;;
+            }
+
+			.text {
+				font-family: Arial, Helvetica, sans-serif;
+				fill: #fff;
+				font-size: 1em;
+				text-anchor: middle;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+			//Half pie chart
+
+			//Settings
+			var w = 600
+			var h = 300
+			var anglesRange = 0.5 * Math.PI
+			var radius = Math.min(width, 2 * height) / 2
+
+			var thickness = 20
+
+			//Data
+			d3.csv('./federaal.csv', function(data) {
+                dataset = data;
+                init();
+            });
+			
+            function init() {
+
+            }
+
+			
+		</script>
+	</body>
+</html>
