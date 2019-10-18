@@ -21,13 +21,28 @@
 
 
 			//Data
-			d3.csv('./federaal.csv', function(data) {
-                dataset = data;
-                init();
+			d3.csv('./federaal2.csv', function(data) {
+                init(data);
             });
 			
-            function init() {
+            function init(data) {
+				var svg = d3.select("body")
+					.append("svg")
+					.attr("width", w)
+					.attr("height", h)
+					.append("g")
 
+				 // stratify the data: reformatting for d3.js
+				var root = d3.stratify()
+					.id(function(d) { 
+						console.log(d);
+						return d.Partij;
+					})   // Name of the entity (column name is Partij in csv)
+					.parentId(function(d) { return d.parent; })   // Name of the parent (column name is Parent in csv)
+					(data);
+
+				root.sum(function(d) { return +d.value })   // Compute the numeric value for each entity
+				console.log('Data', data);
             }
 			
 		</script>

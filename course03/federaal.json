@@ -1,16 +1,46 @@
-[
+{
+    "partij": "federaal",
+    "children": [
         {
-        "partij": "groen",
-        "children": [
-            {"partij": "Groen", "zetels": 12},
-            {"partij": "Ecolo", "zetels": 18}
-        ]
+            "partij": "geel",
+            "children": [
+                {"partij": "NV-A", "zetels": 25}
+            ]
+        },
+        {
+            "partij": "oranje",
+            "children": [
+                {"partij": "CDV", "zetels": 12},
+                {"partij": "CDH", "zetels": 5}
+            ]
+        },
+        {
+            "partij": "rood",
+            "children": [
+                {"partij": "PS", "zetels": 20},
+                {"partij": "sp-a", "zetels": 9},
+                {"partij": "PTB-PVDA", "zetels": 12}
+            ]
+        },
+        {
+            "partij": "groen",
+            "children": [
+                {"partij": "groen", "zetels": 8},
+                {"partij": "Ecolo", "zetels": 13}
+            ]
         },
         {
             "partij": "blauw",
             "children": [
-            {"partij": "OpenVLD", "zetels": 8},
-            {"partij": "MR", "zetels": 13}
+                {"partij": "Open-VLD", "zetels": 12},
+                {"partij": "MR", "zetels": 14}
+            ]
+        },
+        {
+            "partij": "paars",
+            "children": [
+                {"partij": "DeFi", "zetels": 2}
             ]
         }
-]
+    ]
+}
