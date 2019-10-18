@@ -1,0 +1,16 @@
+[
+        {
+        "partij": "groen",
+        "children": [
+            {"partij": "Groen", "zetels": 12},
+            {"partij": "Ecolo", "zetels": 18}
+        ]
+        },
+        {
+            "partij": "blauw",
+            "children": [
+            {"partij": "OpenVLD", "zetels": 8},
+            {"partij": "MR", "zetels": 13}
+            ]
+        }
+]
