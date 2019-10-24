@@ -1,0 +1,88 @@
+{
+    "federaal": {
+        "partij": "federaal",
+        "children": [
+            {
+                "partij": "geel",
+                "children": [
+                    {"partij": "NV-A", "zetels": 25}
+                ]
+            },
+            {
+                "partij": "oranje",
+                "children": [
+                    {"partij": "CDV", "zetels": 12},
+                    {"partij": "CDH", "zetels": 5}
+                ]
+            },
+            {
+                "partij": "rood",
+                "children": [
+                    {"partij": "PS", "zetels": 20},
+                    {"partij": "sp-a", "zetels": 9},
+                    {"partij": "PTB-PVDA", "zetels": 12}
+                ]
+            },
+            {
+                "partij": "groen",
+                "children": [
+                    {"partij": "groen", "zetels": 8},
+                    {"partij": "Ecolo", "zetels": 13}
+                ]
+            },
+            {
+                "partij": "blauw",
+                "children": [
+                    {"partij": "Open-VLD", "zetels": 12},
+                    {"partij": "MR", "zetels": 14}
+                ]
+            },
+            {
+                "partij": "paars",
+                "children": [
+                    {"partij": "DeFi", "zetels": 2}
+                ]
+            }
+        ]
+    },
+    "vlaanderen": {
+        "partij": "vlaams",
+        "children": [
+            {"partij": "Vlaams-Belang", "zetels": 23},
+            {"partij": "NV-A", "zetels": 25},
+            {"partij": "CDV", "zetels": 19},
+            {"partij": "sp-a", "zetels": 13},
+            {"partij": "pvda", "zetels": 4},
+            {"partij": "groen", "zetels": 14},
+            {"partij": "Open-VLD", "zetels": 16}
+        ]
+    },
+    "wallonie": {
+        "partij": "waals",
+        "children": [
+            {"partij": "PS", "zetels": 23},
+            {"partij": "MR", "zetels": 20},
+            {"partij": "ECOLO", "zetels": 12},
+            {"partij": "PTB", "zetels": 10},
+            {"partij": "CDH", "zetels": 10}
+        ]
+    },
+
+    "brussel": {
+        "partij": "brussel",
+        "children": [
+            {"partij": "PS", "zetels": 17},
+            {"partij": "ECOLO", "zetels": 15},
+            {"partij": "MR", "zetels": 13},
+            {"partij": "DeFi", "zetels": 10},
+            {"partij": "PTB", "zetels": 10},
+            {"partij": "CDH", "zetels": 6},
+            {"partij": "GROEN", "zetels": 4},
+            {"partij": "NVA", "zetels": 3},
+            {"partij": "Open-VLD", "zetels": 3},
+            {"partij": "One-brussels", "zetels": 3},
+            {"partij": "Vlaams-Belang", "zetels": 1}
+        ]
+    }
+    
+}
