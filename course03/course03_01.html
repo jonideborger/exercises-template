@@ -16,6 +16,43 @@
 				font-size: 1em;
 				text-anchor: middle;
 			}
+
+			.NV-A {
+				fill: rgb(250, 221, 0);
+			}
+
+			.PS,
+			.sp-a {
+
+				fill: rgb(255, 0, 20);
+			}
+
+			.VlaamsBelang {
+				fill: rgb(225, 174, 31);
+			}
+
+			.CDV,
+			.CDH {
+				fill: rgb(255, 128, 0);
+			}
+
+			.MR,
+			.Open-VLD {
+				fill: rgb(29, 78, 182);
+			}
+
+			.Ecolo,
+			.groen {
+				fill: rgb(0, 163, 160)
+			}
+
+			.PTB-PVDA {
+				fill: rgb(204, 0, 68)
+			}
+
+			.DeFi {
+				fill: rgb(203, 0, 173);
+			};
 		</style>
 	</head>
 	<body>
@@ -25,22 +62,91 @@
 
 			//Settings
 			var w = 600
-			var h = 300
-			var anglesRange = 0.5 * Math.PI
-			var radius = Math.min(width, 2 * height) / 2
+			var h = 600
+
+			var angleRange = 1 * Math.PI;
+			var angleOffset = -0.5 * Math.PI;
+
+			var radius = Math.min(w, 2 * h) / 2
 
 			var thickness = 20
 
+			//temp
+			var colors = ["#5EBBF8", "#F5F5F5"]
+
 			//Data
-			d3.csv('./federaal.csv', function(data) {
+			function dataConvertor(d) {
+				return {
+					Partij: d.Partij,
+					Zetels: parseInt(d.Zetels)
+				}
+			}
+
+			d3.csv('./federaal.csv', dataConvertor,function(data) {
                 dataset = data;
                 init();
             });
 			
             function init() {
-				
 
+				//add svg
+				var svg = d3.select("body")
+					.append("svg")
+					.attr("width", w)
+					.attr("height", h)
+					.append("g")
+					.attr("transform", "translate(" + w / 2 + "," + h / 2 + ")");
+
+				// Compute the position of each group on the pie:
+				var pie = d3.pie()
+					.value(function(d) {
+						console.log('Log pie el', d);
+						return d.Zetels; 
+					})
+					.startAngle(angleOffset)
+					.endAngle(angleOffset + angleRange);
+
+				/*
+				value - the data value, returned by the value accessor.
+				startAngle - the start angle of the arc in radians.
+				endAngle - the end angle of the arc in radians.
+				padAngle - the pad angle of the arc in radians.
+				data - the original datum for this arc.
+				*/
+
+			//var data_ready = pie(dataset)
+
+			// Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+			svg.selectAll('path')
+				.data(pie(dataset))
+				.enter()
+				.append('path')
+				.attr('d', d3.arc()
+					.innerRadius(100)         // This is the size of the donut hole
+					.outerRadius(radius)
+				)
+				.attr("class", function (d) {
+					var partij = d.data.Partij.replace(/\s/g, '');
+					console.log('d', partij);
+					return 'pie ' + partij
+				})
+				.attr("stroke", "white")
+				.style("stroke-width", "2px")
+				.style("opacity", 0.7);
+
+			/* svg.selectAll("text")
+				.data(dataset)
+				.enter().append("text")
+				.attr("class", "text")
+				.attr("x", 5) //Move the text from the start angle of the arc
+				.attr("dy", 18) //Move the text down
+				.append("textPath")
+				.text(function(d){
+					console.log('Text', d);
+					return d.Partij;
+				});	 */
             }
+
 
 			
 		</script>

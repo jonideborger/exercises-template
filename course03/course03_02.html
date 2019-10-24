@@ -3,12 +3,56 @@
 	<head>
 		<meta charset="utf-8">
 		<title>D3: Treemap chart with value labels (centered)</title>
-		<script type="text/javascript" src="../d3.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap" rel="stylesheet">
+		<script src="../d3.js" charset="utf-8"></script>
 		<style type="text/css">
 			/* No style rules here yet */	
-			#svg {
-				background: #f00;;
+			svg {
+				background: #eee;
 			}	
+
+			.text {
+				font-family: 'Roboto', sans-serif;
+				fill: #fff;
+				font-size: 1em;
+			}
+
+			.NV-A {
+				fill: rgb(250, 221, 0);
+			}
+
+			.PS,
+			.sp-a {
+
+				fill: rgb(255, 0, 20);
+			}
+
+			.VlaamsBelang {
+				fill: rgb(225, 174, 31);
+			}
+
+			.CDV,
+			.CDH {
+				fill: rgb(255, 128, 0);
+			}
+
+			.MR,
+			.Open-VLD {
+				fill: rgb(29, 78, 182);
+			}
+
+			.Ecolo,
+			.groen {
+				fill: rgb(0, 163, 160)
+			}
+
+			.PTB-PVDA {
+				fill: rgb(204, 0, 68)
+			}
+
+			.DeFi {
+				fill: rgb(203, 0, 173);
+			};
 		</style>
 	</head>
 	<body>
@@ -17,8 +61,7 @@
 
 			//Settings
 			var w = 600
-			var h = 300
-
+			var h = 600
 
 			//Data
 			d3.json('./federaal.json', function(data) {
@@ -32,12 +75,8 @@
 					.attr("height", h)
 					.append("g")
 
-				var root = d3.hierarchy(data)
-				
-
-				// FOR CSV
-				 /* // stratify the data: reformatting for d3.js
-				var root = d3.stratify()
+				 // stratify the data: reformatting for d3.js
+				/* var root = d3.stratify()
 					.id(function(d) { 
 						console.log(d);
 						return d.Partij;
@@ -45,8 +84,47 @@
 					.parentId(function(d) { return d.parent; })   // Name of the parent (column name is Parent in csv)
 					(data);
 
-				root.sum(function(d) { return +d.value })   // Compute the numeric value for each entity */
-				console.log('Data', data);
+				root.sum(function(d) { return +d.value })   // Compute the numeric value for each entity
+				*/
+
+				console.log('data', data);
+
+				var root = d3.hierarchy(data)
+					.sum(function(d){ return d.zetels})
+
+				console.log('hierarchy', root);
+
+				var treemap = d3.treemap()
+					.size([w, h])
+					.padding(4)
+					(root)
+				
+				console.log('hierarchy', root);
+
+				svg.selectAll("rect")
+					.data(root.leaves())
+					.enter()
+					.append("rect")
+					.attr('x', function (d) { return d.x0; })
+					.attr('y', function (d) { return d.y0; })
+					.attr('width', function (d) { return d.x1 - d.x0; })
+					.attr('height', function (d) { return d.y1 - d.y0; })
+					.style("stroke", "black")
+					.attr("class", function (d) {
+						var partij = d.data.partij.replace(/\s/g, '');
+						console.log('d', partij);
+						return 'pie ' + partij
+					});
+				
+				svg.selectAll("text")
+					.data(root.leaves())
+					.enter()
+					.append("text")
+					.attr("class", "text")
+					.attr("x", function(d){ return d.x0+10})    // +10 to adjust position (more right)
+					.attr("y", function(d){ return d.y0+20})    // +20 to adjust position (lower)
+					.text(function(d){ return d.data.partij})
+
             }
 			
 		</script>
